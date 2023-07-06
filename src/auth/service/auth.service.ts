@@ -6,17 +6,20 @@ const users = [
     {
         id: 1,
         username: 'andre@gmail.com',
-        password: '$2b$10$uB2.EeTjtqS4qqb5w6o5QOsoXURjAe8c2DjAjCQDQ2v5GKdoxvlSu' //123456
+        password: '$2b$10$uB2.EeTjtqS4qqb5w6o5QOsoXURjAe8c2DjAjCQDQ2v5GKdoxvlSu', //123456
+        role: 'admin'
     },
     {
         id: 2,
         username: 'sergipe@hotmail.com',
-        password: '$2b$10$9VFduCUb6EftmhQbzVFNwOKkQx3jsF6Ul89ttMWUH.NiCQ7pgJcqq'
+        password: '$2b$10$9VFduCUb6EftmhQbzVFNwOKkQx3jsF6Ul89ttMWUH.NiCQ7pgJcqq',
+        role: 'user'
     },
     {
         id: 3,
         username: 'banana@yahoo.com',
-        password: '$2b$10$mQnK../gxo1.bBayBRt4EeqzoT0xoczdiYe5JDSMlZglAjj9g.l6e'
+        password: '$2b$10$mQnK../gxo1.bBayBRt4EeqzoT0xoczdiYe5JDSMlZglAjj9g.l6e',
+        role: 'user'
     },
 ]
 
@@ -33,6 +36,7 @@ export class AuthService {
         const payload = {
             sub: user.id,
             username: user.username,
+            role: user.role
         }
 
         return this.jwtService.sign(payload)
