@@ -11,7 +11,15 @@ export class AuthController {
 
     @Post()
     async login(@Body() body){
-        return { token: await this.authService.login(body.username, body.password) }
+        try {
+            return { token: await this.authService.login(body.email, body.password) }
+        } catch (error) {
+            return {
+                message: 'Usuário ou senha incorretos',
+                error: error.message,
+                status: error.status
+            }
+        }
     }
 
     @Role('admin')

@@ -11,7 +11,7 @@ export class UserRepository {
     ) { }
 
     async fetchUserByEmail(email: string) {
-        const emailUser = await this.userModel.find({ email: email })
+        const emailUser = await this.userModel.findOne({ email: email })
         if (emailUser) {
             return emailUser
         }
