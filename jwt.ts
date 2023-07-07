@@ -23,3 +23,6 @@ const signature = crypt.createHmac('sha256', key).update(`${headerEncoded}.${pay
 
 
 console.log(`${headerEncoded}.${payloadEncoded}.${base64Url.encode(signature)}`)
+
+
+//para rodar no terminal (node_modules/.bin/ts-node jwt.ts)

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const saltRounds = 10
+const saltRounds = 12
 const password = process.argv.slice(2)[0]
 
 bcrypt.genSalt(saltRounds, function(err, salt){
@@ -7,3 +7,5 @@ bcrypt.genSalt(saltRounds, function(err, salt){
         console.log(hash)
     })
 })
+
+//roda no terminal (node generate-pass.js <password>)
