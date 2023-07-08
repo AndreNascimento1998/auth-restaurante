@@ -14,19 +14,20 @@ export class AuthService {
 
     async login(username: string, password: string) {
         const user = await this.validationCredentials(username, password)
-        
-        if(user){
+
+        if(typeof user != 'boolean'){
             const payload = {
                 email: user.email,
-                role: user.role
+                role: user.role,
             }
+
             return this.jwtService.sign(payload)
         }
 
         throw Error('Usuario e senha inválidos')
     }
 
-    async validationCredentials(email: string, password: string) {
+    async validationCredentials(email: string, password: string): Promise<User|boolean> {
         const userValid = await this.userRepository.fetchUserByEmail(email)
     
         const isValid = bcrypt.compareSync(password, userValid.password)

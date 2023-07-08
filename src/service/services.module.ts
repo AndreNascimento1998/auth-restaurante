@@ -14,7 +14,7 @@ const deps = [
         JwtModule.register({
             secret: 'abcd123456',
             signOptions: {
-                expiresIn: '60s'
+                expiresIn: '180s'
             }
         }),
 
