@@ -1,12 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthSchemas } from 'src/infra/database/schemas/auth.schemas';
 
 const deps = [
-    
-    //MongooseModule.forRoot('mongodb+srv://andrejoarez428:wYl6HfkkVnI3kByh@restaurante-api.pmpxvgn.mongodb.net/restaurante-auth'),
-    MongooseModule.forRoot('mongodb+srv://andrejoarez428:wYl6HfkkVnI3kByh@restaurante-api.pmpxvgn.mongodb.net/restaurante-auth'),
-    
+    MongooseModule.forRootAsync({
+        imports: [ConfigModule], 
+        useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('MONGO_URI'),
+            dbName: config.get('MONGO_DB_NAME')
+        }),
+        inject: [ConfigService]
+    }),
+
     MongooseModule.forFeature([
         { name: 'user', schema: AuthSchemas}
     ])
